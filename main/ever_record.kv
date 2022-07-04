@@ -1,0 +1,360 @@
+# Windowmanager handles navigation between windows.
+WindowManager:
+    AudioHandler:
+    AppInfo:
+    SettingsTab:
+    About:
+    Recordings:
+    ShareToDrive:
+    Confirmed:
+    FormSubmitted:
+
+
+# ImageButton class. Permits ImageButton functionality.
+<ImageButton@Button>:
+    source: None
+
+    Image:
+        source: root.source
+        pos: root.pos
+        size: root.size
+
+#:import audio_player plyer.audio
+<AudioHandler>:
+    name: "audio_handler"
+    sound: audio_player
+
+    GridLayout:
+        rows: 5
+        cols: 3
+        Button:
+            id: app_name
+            text: 'Ever-record'
+            font_size: 38
+            size_hint: 0.125, 0.125
+            bold: True
+            background_color: (0.0, 0.0, 0.0, 1.0)
+            on_release:
+                app.root.current = "app_info"
+
+        Button:
+            id: placeholder_01
+            text: ''
+            size_hint: 0.125, 0.125
+            background_color: (0.0, 0.0, 0.0, 1.0)
+        Button:
+            id: settings
+            text: 'Settings'
+            font_size: 38
+            bold: True
+            size_hint: 0.125, 0.125
+            background_color: (0.0, 0.0, 0.0, 1.0)
+            on_release:
+                app.root.current = "settings"
+
+
+        Button:
+            id: placeholder_02
+            text: ''
+            size_hint: 0.2, 0.2
+            background_color: (0.0, 0.0, 0.0, 1.0)
+
+
+        Button:
+            id: clock
+            text: "0"
+            font_size: 114
+            bold: True
+            size_hint: 0.4, 0.4
+            background_color: (0.0, 0.0, 0.0, 1.0)
+
+        Button:
+            id: placeholder_03
+            text: ''
+            size_hint: 0.2, 0.2
+            background_color: (0.0, 0.0, 0.0, 1.0)
+
+        Button:
+            id: placeholder_04
+            text: ''
+            background_color: (0.0, 0.0, 0.0, 1.0)
+
+
+        ImageButton:
+            id: record_button
+            source: "images/button_resized.png"
+            size: root.size
+            on_release:
+                root.start_recording()
+            background_color: (0.0, 0.0, 0.0, 1.0)
+
+        Button:
+            id: placeholder_05
+            text: ''
+            background_color: (0.0, 0.0, 0.0, 1.0)
+        Button:
+            id: share
+            text: 'Save to Drive'
+            font_size: 34
+            bold: True
+            size_hint: 0.125, 0.125
+            background_color: (0.0, 0.0, 0.0, 1.0)
+            on_release:
+                app.root.current = "share_to_drive"
+        Button:
+            id: play_button
+            text: 'Play'
+            font_size: 34
+            bold: True
+            size_hint: 0.125, 0.125
+            on_release:
+                root.play_recording()
+            background_color: (0.0, 0.0, 0.0, 1.0)
+
+        Button:
+            id: recordings
+            text: 'Recordings'
+            font_size: 34
+            bold: True
+            size_hint: 0.125, 0.125
+            background_color: (0.0, 0.0, 0.0, 1.0)
+            on_release:
+                app.root.current = "recordings"
+        Label:
+            id: state_label
+            size_hint_y: None
+            height: sp(40)
+            text: 'Recording feature is: ' + str(root.sound.state)
+        Label:
+            id: location_label
+            size_hint_y: None
+            height: sp(40)
+            text: '                                                                                           File Located at:             ' + str(root.sound.file_path)
+
+<AppInfo>:
+    name: "app_info"
+    GridLayout:
+        rows: 2
+        cols: 1
+        Label:
+            text: " Ever-record is a sound recording \n application that can record all \n of your sounds. \n Record your sounds and store \n them onto Google Drive!"
+            size: self.texture_size
+        Button:
+            size_hint: 0.125, 0.125
+            text: "Go back"
+            on_release: app.root.current = "audio_handler"
+
+<SettingsTab>:
+    name: "settings"
+    GridLayout:
+        rows: 6
+        cols: 1
+        Button:
+            text: "Recording quality"
+        Button:
+            text: "Recording Location"
+        Button:
+            text: "Default file name"
+        Button:
+            text: "Recording time limit"
+        Button:
+            text: "About"
+            on_release: app.root.current = "about"
+        Button:
+            text: "Go back"
+            on_release: app.root.current = "audio_handler"
+
+<About>:
+    name: "about"
+    GridLayout:
+        rows: 5
+        cols: 1
+        Button:
+            text: "Version: 1.0"
+        Button:
+            text: "End User License Agreement"
+        Button:
+            text: "Privacy Policy"
+        Button:
+            text: "Terms of Use Notice"
+        Button:
+            text: "Go back"
+            on_release: app.root.current = "audio_handler"
+
+
+<Recordings>:
+    name: "recordings"
+    GridLayout:
+
+        cols: 1
+
+        GridLayout:
+
+            cols: 3
+
+            Button:
+                text: "Recording 1: "
+                bold: True
+                font_size: 40
+            Button:
+                text: "Time: 00:10:00"
+            Button:
+                text: "Backup: "
+            Button:
+                text: "Date: 2022-02-12 4:53 PM"
+            Button:
+                text: "More"
+            Button:
+                text: "Placeholder"
+            Button:
+                text: "Recording 2"
+                bold: True
+                font_size: 40
+            Button:
+                text: "Time 00:11:00"
+            Button:
+                text: "Backup: "
+            Button:
+                text: "Date: 2022-02-13 4:53 PM"
+            Button:
+                text: "More"
+            Button:
+                text: "Placeholder"
+            Button:
+                text: "Recording 3"
+                bold: True
+                font_size: 40
+            Button:
+                text: "Time: 00:13:00"
+            Button:
+                text: "Backup: "
+            Button:
+                text: "Date: 2022-02-14 4:53 PM"
+            Button:
+                text: "More"
+            Button:
+                text: "Placeholder"
+            Button:
+                text: "Recording 4"
+                bold: True
+                font_size: 40
+            Button:
+                text: "Time: 00:15:00"
+            Button:
+                text: "Backup: "
+            Button:
+                text: "Date: 2022-02-15 4:53 PM"
+            Button:
+                text: "More"
+            Button:
+                text: "Placeholder"
+            Button:
+                text: "Recording 5"
+                bold: True
+                font_size: 40
+            Button:
+                text: "Time: 00:17:00"
+            Button:
+                text: "Backup: "
+            Button:
+                text: "Date: 2022-02-19 4:53 PM"
+            Button:
+                text: "More"
+            Button:
+                text: "Placeholder"
+            Button:
+                text: "Recording 6"
+                bold: True
+                font_size: 48
+            Button:
+                text: "Time: 00:20:00"
+            Button:
+                text: "Backup: "
+            Button:
+                text: "Date: 2022-02-22 4:53 PM"
+            Button:
+                text: "More"
+            Button:
+                text: "Placeholder"
+            Button:
+                text: ""
+            Button:
+                text: "Back"
+                bold: True
+                font_size: 40
+                on_release: app.root.current = "audio_handler"
+            Button:
+                text: ""
+
+
+<ShareToDrive>:
+    name: "share_to_drive"
+    GridLayout:
+        rows: 4
+        cols: 1
+        Label:
+            text: "Save all of your sounds to Google Drive. Only a one-time payment of 1$ "
+            size: self.texture_size
+        Button:
+            id: web_button
+            size_hint: 0.125, 0.125
+            text: "Donate here:"
+            background_color: (1.0, 0.0, 0.0, 1.0)
+            on_press:
+                import webbrowser
+                webbrowser.open_new_tab('https://www.paypal.com/paypalme/KCYON')
+        Button:
+            id: file_service
+            size_hint: 0.125, 0.125
+            text: "Activate file sharing service"
+            background_color: (1.0, 0.0, 0.0, 1.0)
+
+            # send sound file to google drive.
+            on_press: root.file_uploaded()
+
+            on_release:
+                app.root.current = "confirmed"
+
+        Button:
+            size_hint: 0.125, 0.125
+            text: "Back"
+            on_release: app.root.current = "audio_handler"
+
+<Confirmed>:
+    name: "confirmed"
+    GridLayout:
+        rows: 7
+        cols: 1
+        Label:
+            background_color: (0.0, 1.0, 0.0, 1.0)
+            text: "Sharing feature is enabled. Congrats! \n Please enter your info below"
+            size: self.texture_size
+        TextInput:
+            text: "First name: "
+        TextInput:
+            text: "Last name: "
+        TextInput:
+            text: "Email: "
+        TextInput:
+            text: "Are you a musician? (Yes or No): "
+        Button:
+            size_hint: 0.125, 0.125
+            text: "Submit"
+            on_release: app.root.current = "form_submitted"
+            on_press: root.store_to_db()
+        Button:
+            size_hint: 0.125, 0.125
+            text: "Go back"
+            on_release: app.root.current = "audio_handler"
+
+<FormSubmitted>:
+    name: "form_submitted"
+    GridLayout:
+        rows: 2
+        cols: 1
+        Label:
+            text: "Thanks very much. Please enjoy more sound recording!"
+        Button:
+            text: "Back"
+            on_release: app.root.current = "audio_handler"
+
